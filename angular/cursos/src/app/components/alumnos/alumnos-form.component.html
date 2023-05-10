@@ -1,0 +1,43 @@
+<div class="card  bg-light mb-3">
+  <div class="card-header">{{titulo}}</div>
+  <div class="card-body">
+    <button class="btn btn-secondary my-2" routerLink="/alumnos">Volver</button>
+
+    <form>
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <!--ngModel, viene de alumnos-form.component.ts, al importar el alumno-->
+        <input type="text" name="nombre" class="form-control" id="nombre" [(ngModel)]="model.nombre">
+        <!--Mostrar los errores al crear los usuarios, con ngIf es para preguntar si existen errores-->
+        <div class="alert alert-danger" *ngIf="error?.nombre">{{error.nombre}}</div>
+
+      </div>
+      <div class="form-group">
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apellido" class="form-control" id="apellido" [(ngModel)]="model.apellido">
+        <div class="alert alert-danger" *ngIf="error?.apellido">{{error.apellido}}</div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="model.email">
+        <div class="alert alert-danger" *ngIf="error?.email">{{error.email}}</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+          </div>
+          <div class="custom-file">
+            <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputGroupFile01">Añadir Foto</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <!--Se llamar al metodo crear del service, se verifica si ya existe el alumno para editarlo-->
+        <button type="text" class="btn btn-primary" (click)="model.id? editar(): crear()">{{model.id?
+          'Editar':'Añadir'}}</button>
+      </div>
+    </form>
+  </div>
+</div>
